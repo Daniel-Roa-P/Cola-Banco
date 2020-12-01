@@ -6,7 +6,7 @@ public class ListaCircular {
     private Nodo cabeza;
     private Nodo ultimo;
     private int tamaño;
-    private String cadenaLista, eliminado, pivote;
+    private String cadenaLista;
     
     ListaCircular(){
         
@@ -79,7 +79,6 @@ public class ListaCircular {
         if(actual.equals(ultimo)){
 
             ultimo = anterior;
-            ultimo.setSiguiente(actual.getSiguiente());
             actual = null;
             tamaño--;
 
@@ -118,12 +117,12 @@ public class ListaCircular {
         return cabeza;
     }
 
-    public String getEliminado() {
-        return eliminado;
+    public Nodo getUltimo() {
+        return ultimo;
     }
 
-    public String getPivote() {
-        return pivote;
+    public void setUltimo(Nodo ultimo) {
+        this.ultimo = ultimo;
     }
     
 }

@@ -81,11 +81,9 @@ public class ColaBanco extends JFrame implements ActionListener{
         scrollPane1.setPreferredSize(new Dimension(465, 500));
         scrollPane1.setBackground(Color.BLUE);
         
-        llenarBanco();
-        
     }
     
-    public void llenarBanco(){
+    public void llenarCola(){
         
         scrollPane.removeAll();
             
@@ -97,13 +95,47 @@ public class ColaBanco extends JFrame implements ActionListener{
         Icon iconoEscalado = new ImageIcon(imgEscalada);
         img1.setBounds(130 , 0, 100, 100);
         img1.setIcon(iconoEscalado);
-
+        
         scrollPane.add(img1);
+        
+        Nodo q = cola.getCabeza();
+        
+        int coorY = 0;
+        
+        while(true){
 
+            JLabel tempTexto = new JLabel(q.getLlave() + ", tareas: " + q.getTareas());
+            tempTexto.setBounds(130, 120 + (30*coorY), 150, 20);
+            tempTexto.setBackground(Color.red);
+            
+            scrollPane.add(tempTexto);
+            
+            coorY++;
+            
+            q = q.getSiguiente();
+            
+            if(q.equals(cola.getUltimo())){
+                
+                if(!q.equals(cola.getCabeza())){
+                
+                    JLabel tempTexto2 = new JLabel(q.getLlave() + ", tareas: " + q.getTareas());
+                    tempTexto2.setBounds(130, 120 + (30*coorY), 150, 20);
+                    tempTexto2.setBackground(Color.red);
+                    
+                    scrollPane.add(tempTexto2);
+                    
+                }
+
+                break;
+                
+            }
+            
+        }  
+        
         scrollPane.repaint();
         scrollPane1.setViewportView(scrollPane);
         
-    } 
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -116,6 +148,8 @@ public class ColaBanco extends JFrame implements ActionListener{
             cola.insertar(nombre, tareas);
             
             System.out.println(cola.imprimir());
+            
+            llenarCola();
             
         } else if(e.getSource() == botonAtender && cola.getTamaño()>0) {
             
@@ -133,6 +167,8 @@ public class ColaBanco extends JFrame implements ActionListener{
             }
             
             System.out.println(cola.imprimir());
+            
+            llenarCola();
             
         }
         
