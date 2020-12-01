@@ -102,8 +102,8 @@ public class ColaBanco extends JFrame implements ActionListener{
         
         int coorY = 0;
         
-        while(true){
-
+        while(true && cola.getUltimo()!= null){            
+            
             JLabel tempTexto = new JLabel(q.getLlave() + ", tareas: " + q.getTareas());
             tempTexto.setBounds(130, 120 + (30*coorY), 150, 20);
             tempTexto.setBackground(Color.red);
@@ -166,7 +166,11 @@ public class ColaBanco extends JFrame implements ActionListener{
                 
             }
             
-            System.out.println(cola.imprimir());
+            if(cola.getTamaño()>0){
+            
+                System.out.println(cola.imprimir());
+
+            }
             
             llenarCola();
             

@@ -79,6 +79,7 @@ public class ListaCircular {
         if(actual.equals(ultimo)){
 
             ultimo = anterior;
+            this.cabeza = null; 
             actual = null;
             tamaño--;
 
