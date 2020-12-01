@@ -25,12 +25,14 @@ public class ColaBanco extends JFrame implements ActionListener{
     
     JLabel texto1 = new JLabel("Ingrese el nombre del cliente: ");
     JLabel texto2 = new JLabel("Ingrese las tareas a realizar: ");
+    JLabel texto3 = new JLabel("Informacion: ");
     
     JScrollPane scrollPane = new JScrollPane();
     JScrollPane scrollPane1 = new JScrollPane();
     
     JTextField campoNombre = new JTextField();
     JTextField campoTareas = new JTextField();
+    JTextField campoInfo = new JTextField();
     
     ListaCircular cola = new ListaCircular();
     
@@ -57,9 +59,11 @@ public class ColaBanco extends JFrame implements ActionListener{
         
         c.add(campoNombre);
         c.add(campoTareas);
+        c.add(campoInfo);
         
         c.add(texto1);
         c.add(texto2);
+        c.add(texto3);
         
         c.add(botonIngreso);
         c.add(botonAtender);
@@ -70,9 +74,11 @@ public class ColaBanco extends JFrame implements ActionListener{
      
         texto1.setBounds(60, 0, 250, 30);
         texto2.setBounds(60, 25, 300, 30);
+        texto3.setBounds(5, 115, 300, 30);
         
         campoNombre.setBounds(240, 5, 100, 20);
         campoTareas.setBounds(240, 30, 100, 20);
+        campoInfo.setBounds(80, 120, 300, 20);
         
         botonIngreso.addActionListener(this);
         botonIngreso.setBounds(60, 60, 280, 20);
@@ -94,8 +100,8 @@ public class ColaBanco extends JFrame implements ActionListener{
         scrollPane.setPreferredSize(new Dimension(470, 3000));  
         scrollPane.setBackground(Color.LIGHT_GRAY);
         
-        scrollPane1.setBounds(5, 120, 370, 490);
-        scrollPane1.setPreferredSize(new Dimension(465, 490));
+        scrollPane1.setBounds(5, 150, 370, 460);
+        scrollPane1.setPreferredSize(new Dimension(370, 460));
         scrollPane1.setBackground(Color.BLUE);
         
     }
@@ -166,6 +172,8 @@ public class ColaBanco extends JFrame implements ActionListener{
             
             System.out.println(cola.imprimir());
             
+            campoInfo.setText(nombre + " fue agregado con " + tareas + " tareas.");
+            
             llenarCola();
             
         } else if(e.getSource() == botonAtender && cola.getTamaño()>0) {
@@ -174,11 +182,13 @@ public class ColaBanco extends JFrame implements ActionListener{
             
             if(clienteActual.getTareas()-3 <= 0){
             
+                campoInfo.setText(cola.getCabeza().getLlave() + " se fue de la cola.");
                 cola.eliminar(clienteActual);
                 
             } else {
                 
                 cola.getCabeza().setTareas(clienteActual.getTareas()-3);
+                campoInfo.setText(cola.getCabeza().getLlave() + " fue al inicio de la cola con " + cola.getCabeza().getTareas() + " tareas.");
                 cola.intercambiar(clienteActual);
                 
             }
@@ -195,7 +205,7 @@ public class ColaBanco extends JFrame implements ActionListener{
         
             for(int i = 0; i<10; i++){
                 
-                cola.insertar(nombres[(int) (Math.random() * 20)], (int) (Math.random() * 15));
+                cola.insertar(nombres[(int) (Math.random() * 20)], (int) (Math.random() * 15) + 1);
                 
             }
             

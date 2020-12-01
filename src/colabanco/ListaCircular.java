@@ -73,12 +73,11 @@ public class ListaCircular {
     
     public void eliminar(Nodo nodoAtendido){
         
-        Nodo anterior = null;
         Nodo actual = nodoAtendido;
                 
         if(actual.equals(ultimo)){
 
-            ultimo = anterior;
+            ultimo = null;
             this.cabeza = null; 
             actual = null;
             tamaño--;
@@ -90,13 +89,7 @@ public class ListaCircular {
             actual = null;
             tamaño--;
 
-        } else {
-
-            anterior.setSiguiente(actual.getSiguiente());
-            actual = null;
-            tamaño--;
-
-        }
+        } 
         
     }
 
