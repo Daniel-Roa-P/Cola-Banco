@@ -20,6 +20,8 @@ public class ColaBanco extends JFrame implements ActionListener{
 
     JButton botonIngreso = new JButton("Ingresar");
     JButton botonAtender = new JButton("Atender");
+    JButton botonAleatorio = new JButton("llenar aleatoriamente (10 clientes)");
+    JButton botonVaciar = new JButton("Vaciar cola");
     
     JLabel texto1 = new JLabel("Ingrese el nombre del cliente: ");
     JLabel texto2 = new JLabel("Ingrese las tareas a realizar: ");
@@ -31,6 +33,11 @@ public class ColaBanco extends JFrame implements ActionListener{
     JTextField campoTareas = new JTextField();
     
     ListaCircular cola = new ListaCircular();
+    
+    String [] nombres = {"Daniela", "Ana", "Mario", "Carlos", "Juan", "Karen", 
+                        "Brayan", "David", "Diego", "Cristian", "Carolina", 
+                        "Nury", "Alejandro", "Sebastian", "Sergio", "Salome", 
+                        "Sofia", "Jhon", "Andres", "Esteban"};
     
     public static void main(String[] args) {
 
@@ -56,6 +63,8 @@ public class ColaBanco extends JFrame implements ActionListener{
         
         c.add(botonIngreso);
         c.add(botonAtender);
+        c.add(botonAleatorio);
+        c.add(botonVaciar);
         
         c.add(scrollPane1);
      
@@ -66,19 +75,27 @@ public class ColaBanco extends JFrame implements ActionListener{
         campoTareas.setBounds(240, 30, 100, 20);
         
         botonIngreso.addActionListener(this);
-        botonIngreso.setBounds(60, 60, 280, 30);
+        botonIngreso.setBounds(60, 60, 280, 20);
         botonIngreso.setBackground(Color.green);
         
+        botonAleatorio.addActionListener(this);
+        botonAleatorio.setBounds(60, 90, 280, 20);
+        botonAleatorio.setBackground(Color.CYAN);
+        
         botonAtender.addActionListener(this);
-        botonAtender.setBounds(60, 621, 280, 30);
+        botonAtender.setBounds(5, 621, 170, 30);
         botonAtender.setBackground(Color.ORANGE);
      
+        botonVaciar.addActionListener(this);
+        botonVaciar.setBounds(205, 621, 170, 30);
+        botonVaciar.setBackground(Color.RED);
+        
         scrollPane.setBounds(0, 0, 470, 3000);
         scrollPane.setPreferredSize(new Dimension(470, 3000));  
         scrollPane.setBackground(Color.LIGHT_GRAY);
         
-        scrollPane1.setBounds(5, 100, 370, 510);
-        scrollPane1.setPreferredSize(new Dimension(465, 500));
+        scrollPane1.setBounds(5, 120, 370, 490);
+        scrollPane1.setPreferredSize(new Dimension(465, 490));
         scrollPane1.setBackground(Color.BLUE);
         
     }
@@ -140,7 +157,7 @@ public class ColaBanco extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == botonIngreso){
+        if(e.getSource() == botonIngreso && campoNombre.getText().length()!=0 && campoTareas.getText().length()!=0){
             
             String nombre = campoNombre.getText();
             int tareas = Integer.parseInt(campoTareas.getText());
@@ -172,6 +189,24 @@ public class ColaBanco extends JFrame implements ActionListener{
 
             }
             
+            llenarCola();
+            
+        } else if (e.getSource() == botonAleatorio){
+        
+            for(int i = 0; i<10; i++){
+                
+                cola.insertar(nombres[(int) (Math.random() * 20)], (int) (Math.random() * 15));
+                
+            }
+            
+            System.out.println(cola.imprimir());
+            
+            llenarCola();
+            
+        } else if (e.getSource() == botonVaciar){
+        
+            cola = new ListaCircular();
+        
             llenarCola();
             
         }
